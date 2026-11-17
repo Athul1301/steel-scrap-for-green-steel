@@ -1,0 +1,107 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "v015",
+  "position": {
+    "x": 20,
+    "y": 70,
+    "z": 1500,
+    "height": 330,
+    "width": 1240,
+    "tabOrder": 1500
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Date"
+                    }
+                  },
+                  "Property": "Date"
+                }
+              },
+              "queryRef": "Date.Date",
+              "nativeQueryRef": "Date",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Trade"
+                    }
+                  },
+                  "Property": "Scrap Export Price (EUR/t)"
+                }
+              },
+              "queryRef": "Trade.Scrap Export Price (EUR/t)",
+              "nativeQueryRef": "Scrap Export Price (EUR/t)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Trade"
+                    }
+                  },
+                  "Property": "Pig Iron Import Price (EUR/t)"
+                }
+              },
+              "queryRef": "Trade.Pig Iron Import Price (EUR/t)",
+              "nativeQueryRef": "Pig Iron Import Price (EUR/t)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Trade"
+                    }
+                  },
+                  "Property": "DRI Import Price (EUR/t)"
+                }
+              },
+              "queryRef": "Trade.DRI Import Price (EUR/t)",
+              "nativeQueryRef": "DRI Import Price (EUR/t)"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Implied prices (EUR/t): scrap exports vs pig iron and DRI imports'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

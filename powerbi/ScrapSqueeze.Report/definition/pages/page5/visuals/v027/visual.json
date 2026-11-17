@@ -1,0 +1,158 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "v027",
+  "position": {
+    "x": 20,
+    "y": 405,
+    "z": 2700,
+    "height": 295,
+    "width": 1240,
+    "tabOrder": 2700
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Charge Mix"
+                    }
+                  },
+                  "Property": "year"
+                }
+              },
+              "queryRef": "Charge Mix.year",
+              "nativeQueryRef": "year"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Charge Mix"
+                    }
+                  },
+                  "Property": "scrap_price_uplift"
+                }
+              },
+              "queryRef": "Charge Mix.scrap_price_uplift",
+              "nativeQueryRef": "scrap_price_uplift"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Charge Mix"
+                    }
+                  },
+                  "Property": "co2_price"
+                }
+              },
+              "queryRef": "Charge Mix.co2_price",
+              "nativeQueryRef": "co2_price"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Charge Mix"
+                    }
+                  },
+                  "Property": "share_Scrap"
+                }
+              },
+              "queryRef": "Charge Mix.share_Scrap",
+              "nativeQueryRef": "share_Scrap"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Charge Mix"
+                    }
+                  },
+                  "Property": "share_DRI/HBI"
+                }
+              },
+              "queryRef": "Charge Mix.share_DRI/HBI",
+              "nativeQueryRef": "share_DRI/HBI"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Charge Mix"
+                    }
+                  },
+                  "Property": "share_Pig iron"
+                }
+              },
+              "queryRef": "Charge Mix.share_Pig iron",
+              "nativeQueryRef": "share_Pig iron"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Charge Mix"
+                    }
+                  },
+                  "Property": "share_Hot metal (own BF)"
+                }
+              },
+              "queryRef": "Charge Mix.share_Hot metal (own BF)",
+              "nativeQueryRef": "share_Hot metal (own BF)"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Charge Mix"
+                    }
+                  },
+                  "Property": "cost_eur_per_t_steel"
+                }
+              },
+              "queryRef": "Charge Mix.cost_eur_per_t_steel",
+              "nativeQueryRef": "cost_eur_per_t_steel"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Cost-optimal charge mix under scrap price and CO2 scenarios'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

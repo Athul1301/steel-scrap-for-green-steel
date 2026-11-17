@@ -1,0 +1,97 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "v025",
+  "position": {
+    "x": 20,
+    "y": 70,
+    "z": 2500,
+    "height": 320,
+    "width": 620,
+    "tabOrder": 2500
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Input Costs"
+                    }
+                  },
+                  "Property": "input"
+                }
+              },
+              "queryRef": "Input Costs.input",
+              "nativeQueryRef": "input",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Input Costs"
+                    }
+                  },
+                  "Property": "Cost per t Steel (EUR)"
+                }
+              },
+              "queryRef": "Input Costs.Cost per t Steel (EUR)",
+              "nativeQueryRef": "Cost per t Steel (EUR)"
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Input Costs"
+                    }
+                  },
+                  "Property": "year"
+                }
+              },
+              "queryRef": "Input Costs.year",
+              "nativeQueryRef": "year"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Metallic input cost incl. carbon, EUR per t of liquid steel'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

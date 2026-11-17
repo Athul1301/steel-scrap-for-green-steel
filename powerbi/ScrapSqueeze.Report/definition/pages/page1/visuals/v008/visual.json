@@ -1,0 +1,143 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "v008",
+  "position": {
+    "x": 20,
+    "y": 230,
+    "z": 800,
+    "height": 470,
+    "width": 760,
+    "tabOrder": 800
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Date"
+                    }
+                  },
+                  "Property": "Date"
+                }
+              },
+              "queryRef": "Date.Date",
+              "nativeQueryRef": "Date",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Trade"
+                    }
+                  },
+                  "Property": "partner_group"
+                }
+              },
+              "queryRef": "Trade.partner_group",
+              "nativeQueryRef": "partner_group"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Trade"
+                    }
+                  },
+                  "Property": "Scrap Exports (Mt)"
+                }
+              },
+              "queryRef": "Trade.Scrap Exports (Mt)",
+              "nativeQueryRef": "Scrap Exports (Mt)"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Monthly scrap exports by destination group (Mt)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "f67545c0150d528ad4e3",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Date"
+              }
+            },
+            "Property": "Date"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "7b4ef7cca655a4001811",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Trade"
+              }
+            },
+            "Property": "Scrap Exports (Mt)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "c5ab8575bcb525306b6e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Trade"
+              }
+            },
+            "Property": "partner_group"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "v012",
+  "position": {
+    "x": 640,
+    "y": 70,
+    "z": 1200,
+    "height": 300,
+    "width": 620,
+    "tabOrder": 1200
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Date"
+                    }
+                  },
+                  "Property": "Year"
+                }
+              },
+              "queryRef": "Date.Year",
+              "nativeQueryRef": "Year",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Trade"
+                    }
+                  },
+                  "Property": "Primary Metallics Imports (Mt)"
+                }
+              },
+              "queryRef": "Trade.Primary Metallics Imports (Mt)",
+              "nativeQueryRef": "Primary Metallics Imports (Mt)"
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Trade"
+                    }
+                  },
+                  "Property": "product_name"
+                }
+              },
+              "queryRef": "Trade.product_name",
+              "nativeQueryRef": "product_name"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'EU imports of pig iron and DRI/HBI (Mt)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

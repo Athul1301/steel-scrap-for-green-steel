@@ -1,0 +1,96 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "v026",
+  "position": {
+    "x": 660,
+    "y": 70,
+    "z": 2600,
+    "height": 320,
+    "width": 600,
+    "tabOrder": 2600
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Sourcing Options"
+                    }
+                  },
+                  "Property": "option"
+                }
+              },
+              "queryRef": "Sourcing Options.option",
+              "nativeQueryRef": "option",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Sourcing Options"
+                    }
+                  },
+                  "Property": "Weighted Score"
+                }
+              },
+              "queryRef": "Sourcing Options.Weighted Score",
+              "nativeQueryRef": "Weighted Score"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Sourcing Options"
+                  }
+                },
+                "Property": "Weighted Score"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Sourcing options: weighted score'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

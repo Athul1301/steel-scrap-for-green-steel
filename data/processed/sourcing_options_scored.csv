@@ -1,0 +1,6 @@
+option,cost,security,carbon,quality,flexibility,weighted_score
+Spot purchases only,4,1,5,2,5,3.05
+Long-term contracts with recyclers,3,4,5,4,3,3.75
+Own scrap collection (buy/partner),3,5,5,4,2,3.95
+"DRI/HBI offtake, non-Russian origin",3,3,3,5,2,3.2
+Pig iron imports,2,2,1,5,4,2.4999999999999996

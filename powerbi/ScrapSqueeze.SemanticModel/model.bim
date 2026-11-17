@@ -1,0 +1,1323 @@
+{
+  "compatibilityLevel": 1606,
+  "model": {
+    "annotations": [
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"DataFolder\", \"Trade\", \"Scenario Surplus\", \"EAF Projects\", \"Price Drivers\", \"Input Costs\", \"Charge Mix\", \"Sourcing Options\", \"Member States\", \"Date\"]"
+      },
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "1"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      }
+    ],
+    "culture": "en-US",
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "expressions": [
+      {
+        "name": "DataFolder",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Text"
+          }
+        ],
+        "expression": "\"C:\\Users\\Athul\\Desktop\\OneDrive - Groupe INSEEC (POCE)\\files\\Claude\\Europe Scrap Squeeze\\data\\processed\\\" meta [IsParameterQuery=true, Type=\"Text\", IsParameterQueryRequired=true]",
+        "kind": "m",
+        "lineageTag": "6b6791a6-bba8-4630-a3ed-ba33394313a8"
+      }
+    ],
+    "relationships": [
+      {
+        "name": "Trade_Date",
+        "fromColumn": "date",
+        "fromTable": "Trade",
+        "toColumn": "Date",
+        "toTable": "Date"
+      },
+      {
+        "name": "489c99e0-d847-45f1-a0c6-f72a2093bfd2",
+        "fromColumn": "date",
+        "fromTable": "Price Drivers",
+        "joinOnDateBehavior": "datePartOnly",
+        "toColumn": "Date",
+        "toTable": "LocalDateTable_4692bf1f-0ca0-47e1-9ffd-87a09b313a34"
+      }
+    ],
+    "sourceQueryCulture": "en-US",
+    "tables": [
+      {
+        "name": "Trade",
+        "columns": [
+          {
+            "name": "date",
+            "annotations": [
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "c12c6960-cb9a-4928-bc09-2f4fec8bba3d",
+            "sourceColumn": "date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "year",
+            "dataType": "int64",
+            "lineageTag": "c2313863-5d55-4110-871f-e9fe036d8cf4",
+            "sourceColumn": "year",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "partner",
+            "dataType": "string",
+            "lineageTag": "8ed8859e-8b52-47de-99a2-6f6f1c57d955",
+            "sourceColumn": "partner",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "partner_name",
+            "dataType": "string",
+            "lineageTag": "248f8a60-245c-4eca-bef5-721db764b888",
+            "sourceColumn": "partner_name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "partner_group",
+            "dataType": "string",
+            "lineageTag": "7610b1ba-6ad0-497f-82c1-2042826d5f1a",
+            "sourceColumn": "partner_group",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "product",
+            "dataType": "string",
+            "lineageTag": "34f93ae5-4dcd-452c-96cb-2a9e2463b363",
+            "sourceColumn": "product",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "product_name",
+            "dataType": "string",
+            "lineageTag": "1e85fb02-fcce-4c67-b022-cb282846aa41",
+            "sourceColumn": "product_name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "flow",
+            "dataType": "string",
+            "lineageTag": "5d6f6e62-b00f-414d-8cc6-79c2ed2c12cd",
+            "sourceColumn": "flow",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "tonnes",
+            "dataType": "double",
+            "lineageTag": "da6cd33b-a498-4720-a34f-efec0fe1c444",
+            "sourceColumn": "tonnes",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "eur",
+            "dataType": "double",
+            "lineageTag": "eb5c9005-93de-46c7-9641-08ca28593b13",
+            "sourceColumn": "eur",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "26da7c84-0a31-43c9-acee-10af6b56026b",
+        "measures": [
+          {
+            "name": "Scrap Exports (Mt)",
+            "displayFolder": "Scrap trade",
+            "expression": "CALCULATE ( DIVIDE ( SUM ( Trade[tonnes] ), 1000000 ), Trade[product] = \"7204\", Trade[flow] = \"export\", KEEPFILTERS ( Trade[partner_group] IN { \"OECD\", \"non-OECD\" } ) )",
+            "formatString": "#,##0.00",
+            "lineageTag": "4c23454a-33d5-4cf0-a95f-78de08ddebcc"
+          },
+          {
+            "name": "Scrap Exports to non-OECD (Mt)",
+            "displayFolder": "Scrap trade",
+            "expression": "CALCULATE ( [Scrap Exports (Mt)], Trade[partner_group] = \"non-OECD\" )",
+            "formatString": "#,##0.00",
+            "lineageTag": "02c42b83-8db7-47af-846f-7838c2fab54b"
+          },
+          {
+            "name": "non-OECD Share %",
+            "displayFolder": "Scrap trade",
+            "expression": "DIVIDE ( [Scrap Exports to non-OECD (Mt)], [Scrap Exports (Mt)] )",
+            "formatString": "0.0%",
+            "lineageTag": "05c2d755-afb1-4b69-a19d-18eb828a5dc6"
+          },
+          {
+            "name": "Scrap Imports (Mt)",
+            "displayFolder": "Scrap trade",
+            "expression": "CALCULATE ( DIVIDE ( SUM ( Trade[tonnes] ), 1000000 ), Trade[product] = \"7204\", Trade[flow] = \"import\", Trade[partner] = \"EXT_EU\" )",
+            "formatString": "#,##0.00",
+            "lineageTag": "72dae0ef-9a49-40b6-a909-e3430e29109c"
+          },
+          {
+            "name": "Net Scrap Exports (Mt)",
+            "displayFolder": "Scrap trade",
+            "expression": "CALCULATE ( DIVIDE ( SUM ( Trade[tonnes] ), 1000000 ), Trade[product] = \"7204\", Trade[flow] = \"export\", Trade[partner] = \"EXT_EU\" ) - [Scrap Imports (Mt)]",
+            "formatString": "#,##0.00",
+            "lineageTag": "cbccbc26-5cff-4de1-bc4d-5d828440a26e"
+          },
+          {
+            "name": "Scrap Export Price (EUR/t)",
+            "displayFolder": "Prices",
+            "expression": [
+              "VAR Eur = CALCULATE ( SUM ( Trade[eur] ), Trade[product] = \"7204\", Trade[flow] = \"export\", Trade[partner_group] IN {\"OECD\", \"non-OECD\"} )",
+              "VAR Tonnes = CALCULATE ( SUM ( Trade[tonnes] ), Trade[product] = \"7204\", Trade[flow] = \"export\", Trade[partner_group] IN {\"OECD\", \"non-OECD\"} )",
+              "RETURN DIVIDE ( Eur, Tonnes )"
+            ],
+            "formatString": "#,##0",
+            "lineageTag": "d5f2c1ba-2c15-4d1a-bc3c-93cc8ab4cfd6"
+          },
+          {
+            "name": "Pig Iron Import Price (EUR/t)",
+            "displayFolder": "Prices",
+            "expression": [
+              "VAR Eur = CALCULATE ( SUM ( Trade[eur] ), Trade[product] = \"7201\", Trade[flow] = \"import\", Trade[partner] = \"EXT_EU\" )",
+              "VAR Tonnes = CALCULATE ( SUM ( Trade[tonnes] ), Trade[product] = \"7201\", Trade[flow] = \"import\", Trade[partner] = \"EXT_EU\" )",
+              "RETURN DIVIDE ( Eur, Tonnes )"
+            ],
+            "formatString": "#,##0",
+            "lineageTag": "8267e2c2-aa3d-4a68-9fe8-2657216cc391"
+          },
+          {
+            "name": "DRI Import Price (EUR/t)",
+            "displayFolder": "Prices",
+            "expression": [
+              "VAR Eur = CALCULATE ( SUM ( Trade[eur] ), Trade[product] = \"720310\", Trade[flow] = \"import\", Trade[partner] = \"EXT_EU\" )",
+              "VAR Tonnes = CALCULATE ( SUM ( Trade[tonnes] ), Trade[product] = \"720310\", Trade[flow] = \"import\", Trade[partner] = \"EXT_EU\" )",
+              "RETURN DIVIDE ( Eur, Tonnes )"
+            ],
+            "formatString": "#,##0",
+            "lineageTag": "4538c47b-2227-478f-814b-b0d0c9819fba"
+          },
+          {
+            "name": "Scrap Exports YoY %",
+            "displayFolder": "Scrap trade",
+            "expression": [
+              "VAR Cur = [Scrap Exports (Mt)]",
+              "VAR Prev = CALCULATE ( [Scrap Exports (Mt)], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )",
+              "RETURN DIVIDE ( Cur - Prev, Prev )"
+            ],
+            "formatString": "+0.0%;-0.0%;0.0%",
+            "lineageTag": "2e3d1cf5-4d2f-426a-a81b-75c4a3f9be8f"
+          },
+          {
+            "name": "Primary Metallics Imports (Mt)",
+            "displayFolder": "Substitutes",
+            "expression": "CALCULATE ( DIVIDE ( SUM ( Trade[tonnes] ), 1000000 ), Trade[product] IN {\"7201\", \"720310\"}, Trade[flow] = \"import\", Trade[partner_group] IN {\"OECD\", \"non-OECD\"} )",
+            "formatString": "#,##0.00",
+            "lineageTag": "e875e4b0-dca9-40ca-b491-ac378a9f7b3e"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Trade",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"fact_trade_monthly.csv\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Kept = Table.SelectColumns(Promoted, {\"date\", \"year\", \"partner\", \"partner_name\", \"partner_group\", \"product\", \"product_name\", \"flow\", \"tonnes\", \"eur\"}),",
+                "    Typed = Table.TransformColumnTypes(Kept, {{\"date\", type date}, {\"year\", Int64.Type}, {\"partner\", type text}, {\"partner_name\", type text}, {\"partner_group\", type text}, {\"product\", type text}, {\"product_name\", type text}, {\"flow\", type text}, {\"tonnes\", type number}, {\"eur\", type number}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Scenario Surplus",
+        "columns": [
+          {
+            "name": "year",
+            "dataType": "int64",
+            "lineageTag": "b5b859d6-c821-4486-86ee-b32aaea4508b",
+            "sourceColumn": "year",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "scenario",
+            "dataType": "string",
+            "lineageTag": "56d9193a-4cd2-4b7c-bf81-ce3ce32ebb56",
+            "sourceColumn": "scenario",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "new_eaf_scrap_mt",
+            "dataType": "double",
+            "lineageTag": "b2e88cf6-7d87-48fb-b769-e1f565662072",
+            "sourceColumn": "new_eaf_scrap_mt",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "import_substitution_mt",
+            "dataType": "double",
+            "lineageTag": "646e23ad-459b-49a1-8f9b-bc2b628283eb",
+            "sourceColumn": "import_substitution_mt",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "consumption_mt",
+            "dataType": "double",
+            "lineageTag": "8cab2f15-c1bc-482e-9b79-751cfd5777c0",
+            "sourceColumn": "consumption_mt",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "availability_mt",
+            "dataType": "double",
+            "lineageTag": "ccd94f24-5276-459f-bb87-b7393408603b",
+            "sourceColumn": "availability_mt",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "exportable_surplus_mt",
+            "dataType": "double",
+            "lineageTag": "65743106-8e39-4374-bbad-aca0ed1b2799",
+            "sourceColumn": "exportable_surplus_mt",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "3be8ab2b-5bd8-4abf-ae74-da9e58e8f242",
+        "measures": [
+          {
+            "name": "Exportable Surplus (Mt)",
+            "expression": "SUM ( 'Scenario Surplus'[exportable_surplus_mt] )",
+            "formatString": "#,##0.0",
+            "lineageTag": "152c11a4-8c9c-4bbe-b1dc-f8dfe876c502"
+          },
+          {
+            "name": "Scrap Consumption (Mt)",
+            "expression": "SUM ( 'Scenario Surplus'[consumption_mt] )",
+            "formatString": "#,##0.0",
+            "lineageTag": "7aebc8d9-b4ae-424c-891e-453904ee1f3a"
+          },
+          {
+            "name": "OECD Export Pull 2025 (Mt)",
+            "expression": "CALCULATE ( [Scrap Exports (Mt)], Trade[partner_group] = \"OECD\", Trade[year] = 2025, REMOVEFILTERS ( 'Date' ) )",
+            "formatString": "#,##0.0",
+            "lineageTag": "4c84ca35-96bb-47cc-8f9b-b785b1d569d4"
+          },
+          {
+            "name": "Base Surplus 2030 (Mt)",
+            "expression": "CALCULATE ( [Exportable Surplus (Mt)], 'Scenario Surplus'[scenario] = \"Base\", 'Scenario Surplus'[year] = 2030 )",
+            "formatString": "#,##0.0",
+            "lineageTag": "e59744b3-2276-47fd-991d-06b125a59d13"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Scenario Surplus",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"scenario_surplus.csv\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Kept = Table.SelectColumns(Promoted, {\"year\", \"scenario\", \"new_eaf_scrap_mt\", \"import_substitution_mt\", \"consumption_mt\", \"availability_mt\", \"exportable_surplus_mt\"}),",
+                "    Typed = Table.TransformColumnTypes(Kept, {{\"year\", Int64.Type}, {\"scenario\", type text}, {\"new_eaf_scrap_mt\", type number}, {\"import_substitution_mt\", type number}, {\"consumption_mt\", type number}, {\"availability_mt\", type number}, {\"exportable_surplus_mt\", type number}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "EAF Projects",
+        "columns": [
+          {
+            "name": "company",
+            "dataType": "string",
+            "lineageTag": "1383d48d-56fe-40af-b933-66be187ff1c3",
+            "sourceColumn": "company",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "site",
+            "dataType": "string",
+            "lineageTag": "6e00f984-2d35-45cb-8a7e-ef823a76f642",
+            "sourceColumn": "site",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "country",
+            "dataType": "string",
+            "lineageTag": "917c08a3-fa2f-4e26-baff-bdbacf767913",
+            "sourceColumn": "country",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "eaf_capacity_mt",
+            "dataType": "double",
+            "lineageTag": "3181c342-0bf4-4472-8bbb-18e1e5297c7c",
+            "sourceColumn": "eaf_capacity_mt",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "start_year",
+            "dataType": "int64",
+            "lineageTag": "e67c8f7a-f8b1-4a50-98b4-6c163bc4646b",
+            "sourceColumn": "start_year",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "status_nov2026",
+            "dataType": "string",
+            "lineageTag": "a0c6b442-c62f-42b2-a455-b42189f67f5c",
+            "sourceColumn": "status_nov2026",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "confidence",
+            "dataType": "string",
+            "lineageTag": "1889cc80-b34c-4585-926a-3ec41f946ba9",
+            "sourceColumn": "confidence",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "scrap_share",
+            "dataType": "double",
+            "lineageTag": "3aa3f283-90fd-45c6-87ab-db183bf72691",
+            "sourceColumn": "scrap_share",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "source_url",
+            "dataType": "string",
+            "lineageTag": "5fae7f47-44ed-4402-ba56-7ece71f37293",
+            "sourceColumn": "source_url",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "0da8d00f-baf6-4326-b693-2dcc5698e33c",
+        "measures": [
+          {
+            "name": "EAF Capacity (Mt)",
+            "expression": "SUM ( 'EAF Projects'[eaf_capacity_mt] )",
+            "formatString": "#,##0.0",
+            "lineageTag": "2495dc18-e7bb-4242-ab7f-ca9ce2276540"
+          },
+          {
+            "name": "Projects",
+            "expression": "COUNTROWS ( 'EAF Projects' )",
+            "formatString": "0",
+            "lineageTag": "cb3955b1-ef6e-4bee-8247-f2a042c38d61"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "EAF Projects",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"dim_eaf_projects.csv\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Kept = Table.SelectColumns(Promoted, {\"company\", \"site\", \"country\", \"eaf_capacity_mt\", \"start_year\", \"status_nov2026\", \"confidence\", \"scrap_share\", \"source_url\"}),",
+                "    Typed = Table.TransformColumnTypes(Kept, {{\"company\", type text}, {\"site\", type text}, {\"country\", type text}, {\"eaf_capacity_mt\", type number}, {\"start_year\", Int64.Type}, {\"status_nov2026\", type text}, {\"confidence\", type text}, {\"scrap_share\", type number}, {\"source_url\", type text}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Price Drivers",
+        "columns": [
+          {
+            "name": "date",
+            "annotations": [
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "610ad489-6478-4af0-8a47-8f86aae96df5",
+            "sourceColumn": "date",
+            "summarizeBy": "none",
+            "variations": [
+              {
+                "name": "Variation",
+                "defaultHierarchy": {
+                  "hierarchy": "Date Hierarchy",
+                  "table": "LocalDateTable_4692bf1f-0ca0-47e1-9ffd-87a09b313a34"
+                },
+                "isDefault": true,
+                "relationship": "489c99e0-d847-45f1-a0c6-f72a2093bfd2"
+              }
+            ]
+          },
+          {
+            "name": "scrap_eur_t",
+            "dataType": "double",
+            "lineageTag": "43cfc07e-39ce-44c0-a6a7-094d121af90e",
+            "sourceColumn": "scrap_eur_t",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "model_fit_eur_t",
+            "dataType": "double",
+            "lineageTag": "6444ede3-3cad-49d4-87c9-7876a7fe892b",
+            "sourceColumn": "model_fit_eur_t",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "iron_ore_usd",
+            "dataType": "double",
+            "lineageTag": "e24c453d-f33c-4c71-8f73-0d460f8bfc7c",
+            "sourceColumn": "iron_ore_usd",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "eu_gas_usd",
+            "dataType": "double",
+            "lineageTag": "84342274-628f-4447-9872-40b0ac7e15e4",
+            "sourceColumn": "eu_gas_usd",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "41e4cdf4-0c96-41c2-8c33-b9897b8b234a",
+        "measures": [
+          {
+            "name": "Actual Scrap Price",
+            "expression": "AVERAGE ( 'Price Drivers'[scrap_eur_t] )",
+            "formatString": "#,##0",
+            "lineageTag": "e6d33738-86dc-4d8f-b4c2-973b11a696bc"
+          },
+          {
+            "name": "Model Fit",
+            "expression": "AVERAGE ( 'Price Drivers'[model_fit_eur_t] )",
+            "formatString": "#,##0",
+            "lineageTag": "e55dc92a-73e6-465c-8cb2-40a8ea48d04b"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Price Drivers",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"price_drivers_monthly.csv\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Kept = Table.SelectColumns(Promoted, {\"date\", \"scrap_eur_t\", \"model_fit_eur_t\", \"iron_ore_usd\", \"eu_gas_usd\"}),",
+                "    Typed = Table.TransformColumnTypes(Kept, {{\"date\", type date}, {\"scrap_eur_t\", type number}, {\"model_fit_eur_t\", type number}, {\"iron_ore_usd\", type number}, {\"eu_gas_usd\", type number}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Input Costs",
+        "columns": [
+          {
+            "name": "year",
+            "dataType": "string",
+            "lineageTag": "f51e3e39-7a66-4f74-8488-16abb5d357e8",
+            "sourceColumn": "year",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "input",
+            "dataType": "string",
+            "lineageTag": "13972c5d-5647-43b2-8ab2-9d65ec4cbe0b",
+            "sourceColumn": "input",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "price_eur_t",
+            "dataType": "double",
+            "lineageTag": "fce89351-0e59-4fc0-9703-6439a5ceb750",
+            "sourceColumn": "price_eur_t",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "carbon_eur_t",
+            "dataType": "double",
+            "lineageTag": "9f90685e-ac54-470f-a19a-37bbfd2fd91f",
+            "sourceColumn": "carbon_eur_t",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "cost_per_t_steel",
+            "dataType": "double",
+            "lineageTag": "d357e02d-cfa1-43f8-a889-524d240bfc92",
+            "sourceColumn": "cost_per_t_steel",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "ea898d7c-51e0-4d89-ad8b-dd18b8cd31ef",
+        "measures": [
+          {
+            "name": "Cost per t Steel (EUR)",
+            "expression": "SUM ( 'Input Costs'[cost_per_t_steel] )",
+            "formatString": "#,##0",
+            "lineageTag": "35646920-a6ff-46ea-94a2-7e880e6d340e"
+          },
+          {
+            "name": "Carbon Cost (EUR/t input)",
+            "expression": "SUM ( 'Input Costs'[carbon_eur_t] )",
+            "formatString": "#,##0",
+            "lineageTag": "ea8d61bc-f64f-4e85-b094-602c61c6f076"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Input Costs",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"input_costs_carbon.csv\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Kept = Table.SelectColumns(Promoted, {\"year\", \"input\", \"price_eur_t\", \"carbon_eur_t\", \"cost_per_t_steel\"}),",
+                "    Typed = Table.TransformColumnTypes(Kept, {{\"year\", type text}, {\"input\", type text}, {\"price_eur_t\", type number}, {\"carbon_eur_t\", type number}, {\"cost_per_t_steel\", type number}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Charge Mix",
+        "columns": [
+          {
+            "name": "year",
+            "dataType": "int64",
+            "lineageTag": "5b58d8db-9a5e-4f4f-a6ae-0d4a1ca2742a",
+            "sourceColumn": "year",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "scrap_price_uplift",
+            "dataType": "double",
+            "lineageTag": "7ec10fc5-98b5-4abc-802b-b3a13bf37212",
+            "sourceColumn": "scrap_price_uplift",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "co2_price",
+            "dataType": "int64",
+            "lineageTag": "0edafc09-173d-4599-8c03-b3f24d9d6a8f",
+            "sourceColumn": "co2_price",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "share_Scrap",
+            "dataType": "double",
+            "lineageTag": "c9c68bd5-ff79-4265-b657-e5311f4dc73a",
+            "sourceColumn": "share_Scrap",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "share_DRI/HBI",
+            "dataType": "double",
+            "lineageTag": "5378597a-cdbd-4652-b7f2-737c56cc0b69",
+            "sourceColumn": "share_DRI/HBI",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "share_Pig iron",
+            "dataType": "double",
+            "lineageTag": "d1b02cda-d316-436a-ba8b-eded3a85d046",
+            "sourceColumn": "share_Pig iron",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "share_Hot metal (own BF)",
+            "dataType": "double",
+            "lineageTag": "1e44a42e-4f10-40d9-88a0-37862dd05674",
+            "sourceColumn": "share_Hot metal (own BF)",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "cost_eur_per_t_steel",
+            "dataType": "double",
+            "lineageTag": "82b2d85c-8a13-4638-a7e5-9dda71fd12fc",
+            "sourceColumn": "cost_eur_per_t_steel",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "06327456-6b84-4b0e-8b0d-23692988cc0b",
+        "partitions": [
+          {
+            "name": "Charge Mix",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"charge_mix_scenarios.csv\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Kept = Table.SelectColumns(Promoted, {\"year\", \"scrap_price_uplift\", \"co2_price\", \"share_Scrap\", \"share_DRI/HBI\", \"share_Pig iron\", \"share_Hot metal (own BF)\", \"cost_eur_per_t_steel\"}),",
+                "    Typed = Table.TransformColumnTypes(Kept, {{\"year\", Int64.Type}, {\"scrap_price_uplift\", type number}, {\"co2_price\", Int64.Type}, {\"share_Scrap\", type number}, {\"share_DRI/HBI\", type number}, {\"share_Pig iron\", type number}, {\"share_Hot metal (own BF)\", type number}, {\"cost_eur_per_t_steel\", type number}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Sourcing Options",
+        "columns": [
+          {
+            "name": "option",
+            "dataType": "string",
+            "lineageTag": "705fa456-ddc0-41f2-babc-bf644c63c02d",
+            "sourceColumn": "option",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "cost",
+            "dataType": "int64",
+            "lineageTag": "003c94ed-4145-4450-82ae-2b321e81c8e7",
+            "sourceColumn": "cost",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "security",
+            "dataType": "int64",
+            "lineageTag": "3446cf2b-0066-415b-9e08-6d73c21067e0",
+            "sourceColumn": "security",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "carbon",
+            "dataType": "int64",
+            "lineageTag": "0cd83428-e967-4dc0-8032-3c91ec5afece",
+            "sourceColumn": "carbon",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "quality",
+            "dataType": "int64",
+            "lineageTag": "0aa4c721-3536-41ab-a23e-3f6b845fedf5",
+            "sourceColumn": "quality",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "flexibility",
+            "dataType": "int64",
+            "lineageTag": "66b5fe94-e4f4-4b7b-a4bc-e15499bfc1f3",
+            "sourceColumn": "flexibility",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "weighted_score",
+            "dataType": "double",
+            "lineageTag": "3a7867fb-e041-41b3-baf6-c82401dac834",
+            "sourceColumn": "weighted_score",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "0b2b7688-d88e-442e-8c6f-035623c2efeb",
+        "measures": [
+          {
+            "name": "Weighted Score",
+            "expression": "SUM ( 'Sourcing Options'[weighted_score] )",
+            "formatString": "0.00",
+            "lineageTag": "eb2da8ff-3d2b-4637-9f3d-023bdbc1a9b2"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Sourcing Options",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"sourcing_options_scored.csv\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Kept = Table.SelectColumns(Promoted, {\"option\", \"cost\", \"security\", \"carbon\", \"quality\", \"flexibility\", \"weighted_score\"}),",
+                "    Typed = Table.TransformColumnTypes(Kept, {{\"option\", type text}, {\"cost\", Int64.Type}, {\"security\", Int64.Type}, {\"carbon\", Int64.Type}, {\"quality\", Int64.Type}, {\"flexibility\", Int64.Type}, {\"weighted_score\", type number}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Member States",
+        "columns": [
+          {
+            "name": "member_state",
+            "dataType": "string",
+            "lineageTag": "1ecfad2f-c9c1-41cc-ae2d-17159cd7de9f",
+            "sourceColumn": "member_state",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "partner_name",
+            "dataType": "string",
+            "lineageTag": "15d82c73-a9b7-443e-afed-92753ef93799",
+            "sourceColumn": "partner_name",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "net_extra_eu_mt",
+            "dataType": "double",
+            "lineageTag": "0cfdbd73-6b19-4fe4-90d4-51497f5e0e2c",
+            "sourceColumn": "net_extra_eu_mt",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "net_intra_eu_mt",
+            "dataType": "double",
+            "lineageTag": "616047b6-8a55-4807-81ab-5307f948b93a",
+            "sourceColumn": "net_intra_eu_mt",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "net_total_mt",
+            "dataType": "double",
+            "lineageTag": "45811fe6-9112-4af2-a0ec-f906e566f439",
+            "sourceColumn": "net_total_mt",
+            "summarizeBy": "sum"
+          }
+        ],
+        "lineageTag": "0fff578e-6a11-438e-967b-8e2fe1ce6532",
+        "measures": [
+          {
+            "name": "Net Scrap Position 2025 (Mt)",
+            "expression": "SUM ( 'Member States'[net_total_mt] )",
+            "formatString": "#,##0.00",
+            "lineageTag": "0617e753-ca51-4ea6-bdde-d889843a5c9d"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Member States",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(File.Contents(DataFolder & \"member_state_net_2025.csv\"), [Delimiter=\",\", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Kept = Table.SelectColumns(Promoted, {\"member_state\", \"partner_name\", \"net_extra_eu_mt\", \"net_intra_eu_mt\", \"net_total_mt\"}),",
+                "    Typed = Table.TransformColumnTypes(Kept, {{\"member_state\", type text}, {\"partner_name\", type text}, {\"net_extra_eu_mt\", type number}, {\"net_intra_eu_mt\", type number}, {\"net_total_mt\", type number}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Date",
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              },
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "isKey": true,
+            "lineageTag": "b9dc73b0-1189-46ea-8949-78b4a2fb4b9b",
+            "sourceColumn": "Date",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Year",
+            "dataType": "int64",
+            "lineageTag": "879e20df-c1eb-4e6d-b9ca-b9e63477e1f8",
+            "sourceColumn": "Year",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Month",
+            "dataType": "int64",
+            "lineageTag": "18948aea-2e2d-4bb2-a372-2bbd69c4bdfb",
+            "sourceColumn": "Month",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Month Name",
+            "dataType": "string",
+            "lineageTag": "f9c7088b-5b1d-42fc-8171-9bdaead6352e",
+            "sortByColumn": "Month",
+            "sourceColumn": "Month Name"
+          }
+        ],
+        "dataCategory": "Time",
+        "lineageTag": "7f072c4b-992e-46e0-90b5-321db2906934",
+        "partitions": [
+          {
+            "name": "Date",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Dates = List.Dates(#date(2015, 1, 1), Duration.Days(#date(2026, 12, 31) - #date(2015, 1, 1)) + 1, #duration(1, 0, 0, 0)),",
+                "    T = Table.FromList(Dates, Splitter.SplitByNothing(), {\"Date\"}),",
+                "    Typed = Table.TransformColumnTypes(T, {{\"Date\", type date}}),",
+                "    Y = Table.AddColumn(Typed, \"Year\", each Date.Year([Date]), Int64.Type),",
+                "    M = Table.AddColumn(Y, \"Month\", each Date.Month([Date]), Int64.Type),",
+                "    MN = Table.AddColumn(M, \"Month Name\", each Date.ToText([Date], \"MMM\", \"en-US\"), type text)",
+                "in",
+                "    MN"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "DateTableTemplate_0a9fa46a-50e1-45b3-80b3-11bafff3fbfe",
+        "annotations": [
+          {
+            "name": "__PBI_TemplateDateTable",
+            "value": "true"
+          },
+          {
+            "name": "DefaultItem",
+            "value": "DateHierarchy"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "b5ad62d2-9f4b-4605-a402-537c314f9cba",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "ffea0ed7-35e0-48f4-9642-833d9e6d2d76",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "28f60ba5-d959-4e9e-a5ad-f25fda93e197",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isHidden": true,
+            "lineageTag": "de9e12a7-b7c6-41e5-835e-a53c9d02ab24",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "f41a07a0-680d-4395-8185-525651a7d8f4",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isHidden": true,
+            "lineageTag": "2c1bb5b0-4306-429e-ba3c-135c27d6bc86",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Day",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "be6dde0a-a65d-425f-a9a5-3deac334289b",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "6f7b4d10-e6ed-489a-9fa3-9a783b0d79e7",
+                "ordinal": 0
+              },
+              {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "f9c2bb3d-c0ec-4ed4-85ca-868e9fa13a1e",
+                "ordinal": 1
+              },
+              {
+                "name": "Month",
+                "column": "Month",
+                "lineageTag": "fdbccfeb-8c5a-479b-b1e1-b846af5149c9",
+                "ordinal": 2
+              },
+              {
+                "name": "Day",
+                "column": "Day",
+                "lineageTag": "0229e578-b8d6-43e3-bf73-14cb35709fee",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "7c8fcc84-3f2d-4fa8-abc5-225a5f054a24"
+          }
+        ],
+        "isHidden": true,
+        "isPrivate": true,
+        "lineageTag": "c90132a4-de92-4d7b-9824-d562421866dd",
+        "partitions": [
+          {
+            "name": "DateTableTemplate_0a9fa46a-50e1-45b3-80b3-11bafff3fbfe",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(2015,1,1), Date(2015,1,1))",
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "LocalDateTable_4692bf1f-0ca0-47e1-9ffd-87a09b313a34",
+        "annotations": [
+          {
+            "name": "__PBI_LocalDateTable",
+            "value": "true"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "9ee6d082-ef63-4f33-8162-af7aa76cb2b0",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "2f291665-c930-45af-a715-30bcb904a774",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "77ef539a-436c-4908-ba56-9cc42fa8f10f",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isHidden": true,
+            "lineageTag": "74524c4d-81ae-445e-8952-81e7eccab979",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "bbf42a42-49e9-4652-ab81-cef44a0613fc",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isHidden": true,
+            "lineageTag": "3c522eca-0e45-489b-b0ed-1ebda617f3d5",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Day",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "05d5b9cd-03f1-433a-9808-ef9e74506b1d",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "465b430e-2ab3-4a3b-820f-cc25ee32a6d9",
+                "ordinal": 0
+              },
+              {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "5fda521a-be66-4eae-b3d3-2bf84238492f",
+                "ordinal": 1
+              },
+              {
+                "name": "Month",
+                "column": "Month",
+                "lineageTag": "6451b80d-9a5f-4a4f-af20-dcef8c87f4c9",
+                "ordinal": 2
+              },
+              {
+                "name": "Day",
+                "column": "Day",
+                "lineageTag": "23c0af4c-3ac2-45f8-8886-b76014b62f99",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "7720258c-ddff-43a9-8e5f-3a3fff17061c"
+          }
+        ],
+        "isHidden": true,
+        "lineageTag": "1e47c220-40c0-4d94-8809-5c2d042cdceb",
+        "partitions": [
+          {
+            "name": "LocalDateTable_4692bf1f-0ca0-47e1-9ffd-87a09b313a34",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(Year(MIN('Price Drivers'[date])), 1, 1), Date(Year(MAX('Price Drivers'[date])), 12, 31))",
+              "type": "calculated"
+            }
+          }
+        ],
+        "showAsVariationsOnly": true
+      }
+    ]
+  }
+}

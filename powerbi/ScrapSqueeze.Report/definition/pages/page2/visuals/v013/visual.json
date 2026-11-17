@@ -1,0 +1,105 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "v013",
+  "position": {
+    "x": 640,
+    "y": 390,
+    "z": 1300,
+    "height": 310,
+    "width": 620,
+    "tabOrder": 1300
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Trade"
+                    }
+                  },
+                  "Property": "partner_name"
+                }
+              },
+              "queryRef": "Trade.partner_name",
+              "nativeQueryRef": "partner_name"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Trade"
+                    }
+                  },
+                  "Property": "product_name"
+                }
+              },
+              "queryRef": "Trade.product_name",
+              "nativeQueryRef": "product_name"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Trade"
+                    }
+                  },
+                  "Property": "Primary Metallics Imports (Mt)"
+                }
+              },
+              "queryRef": "Trade.Primary Metallics Imports (Mt)",
+              "nativeQueryRef": "Primary Metallics Imports (Mt)"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Trade"
+                  }
+                },
+                "Property": "Primary Metallics Imports (Mt)"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Pig iron and DRI/HBI suppliers, all years'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

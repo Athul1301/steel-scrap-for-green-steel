@@ -1,0 +1,60 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "v019",
+  "position": {
+    "x": 340,
+    "y": 70,
+    "z": 1900,
+    "height": 110,
+    "width": 300,
+    "tabOrder": 1900
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Scenario Surplus"
+                    }
+                  },
+                  "Property": "OECD Export Pull 2025 (Mt)"
+                }
+              },
+              "queryRef": "Scenario Surplus.OECD Export Pull 2025 (Mt)",
+              "nativeQueryRef": "OECD Export Pull 2025 (Mt)"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Exports to OECD buyers 2025 (Mt)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

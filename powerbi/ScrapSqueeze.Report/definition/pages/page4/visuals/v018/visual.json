@@ -1,0 +1,60 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "v018",
+  "position": {
+    "x": 20,
+    "y": 70,
+    "z": 1800,
+    "height": 110,
+    "width": 300,
+    "tabOrder": 1800
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Scenario Surplus"
+                    }
+                  },
+                  "Property": "Base Surplus 2030 (Mt)"
+                }
+              },
+              "queryRef": "Scenario Surplus.Base Surplus 2030 (Mt)",
+              "nativeQueryRef": "Base Surplus 2030 (Mt)"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Base case surplus in 2030 (Mt)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

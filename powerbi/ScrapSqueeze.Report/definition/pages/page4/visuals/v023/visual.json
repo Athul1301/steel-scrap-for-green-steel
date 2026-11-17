@@ -1,0 +1,116 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "v023",
+  "position": {
+    "x": 740,
+    "y": 195,
+    "z": 2300,
+    "height": 505,
+    "width": 520,
+    "tabOrder": 2300
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "EAF Projects"
+                    }
+                  },
+                  "Property": "company"
+                }
+              },
+              "queryRef": "EAF Projects.company",
+              "nativeQueryRef": "company"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "EAF Projects"
+                    }
+                  },
+                  "Property": "site"
+                }
+              },
+              "queryRef": "EAF Projects.site",
+              "nativeQueryRef": "site"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "EAF Projects"
+                    }
+                  },
+                  "Property": "start_year"
+                }
+              },
+              "queryRef": "EAF Projects.start_year",
+              "nativeQueryRef": "start_year"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "EAF Projects"
+                    }
+                  },
+                  "Property": "EAF Capacity (Mt)"
+                }
+              },
+              "queryRef": "EAF Projects.EAF Capacity (Mt)",
+              "nativeQueryRef": "EAF Capacity (Mt)"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "EAF Projects"
+                    }
+                  },
+                  "Property": "confidence"
+                }
+              },
+              "queryRef": "EAF Projects.confidence",
+              "nativeQueryRef": "confidence"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Electric arc furnace project tracker'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

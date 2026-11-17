@@ -1,0 +1,97 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "v022",
+  "position": {
+    "x": 20,
+    "y": 195,
+    "z": 2200,
+    "height": 505,
+    "width": 700,
+    "tabOrder": 2200
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Scenario Surplus"
+                    }
+                  },
+                  "Property": "year"
+                }
+              },
+              "queryRef": "Scenario Surplus.year",
+              "nativeQueryRef": "year",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Scenario Surplus"
+                    }
+                  },
+                  "Property": "Exportable Surplus (Mt)"
+                }
+              },
+              "queryRef": "Scenario Surplus.Exportable Surplus (Mt)",
+              "nativeQueryRef": "Exportable Surplus (Mt)"
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Scenario Surplus"
+                    }
+                  },
+                  "Property": "scenario"
+                }
+              },
+              "queryRef": "Scenario Surplus.scenario",
+              "nativeQueryRef": "scenario"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Exportable scrap surplus by scenario (Mt)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

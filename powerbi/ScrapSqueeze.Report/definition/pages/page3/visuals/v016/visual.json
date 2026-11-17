@@ -1,0 +1,93 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "v016",
+  "position": {
+    "x": 20,
+    "y": 415,
+    "z": 1600,
+    "height": 285,
+    "width": 1240,
+    "tabOrder": 1600
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Price Drivers"
+                    }
+                  },
+                  "Property": "date"
+                }
+              },
+              "queryRef": "Price Drivers.date",
+              "nativeQueryRef": "date",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Price Drivers"
+                    }
+                  },
+                  "Property": "Actual Scrap Price"
+                }
+              },
+              "queryRef": "Price Drivers.Actual Scrap Price",
+              "nativeQueryRef": "Actual Scrap Price"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Price Drivers"
+                    }
+                  },
+                  "Property": "Model Fit"
+                }
+              },
+              "queryRef": "Price Drivers.Model Fit",
+              "nativeQueryRef": "Model Fit"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Scrap price: actual vs driver model (test period from Jan 2024)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

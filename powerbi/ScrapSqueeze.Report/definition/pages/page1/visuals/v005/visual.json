@@ -1,0 +1,60 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/1.0.0/schema.json",
+  "name": "v005",
+  "position": {
+    "x": 510,
+    "y": 95,
+    "z": 500,
+    "height": 120,
+    "width": 240,
+    "tabOrder": 500
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Trade"
+                    }
+                  },
+                  "Property": "Scrap Exports to non-OECD (Mt)"
+                }
+              },
+              "queryRef": "Trade.Scrap Exports to non-OECD (Mt)",
+              "nativeQueryRef": "Scrap Exports to non-OECD (Mt)"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Exposed to May-2027 rule (Mt)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
